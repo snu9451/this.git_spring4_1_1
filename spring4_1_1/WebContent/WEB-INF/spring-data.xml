@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	<bean id = "data-source-target" class = "org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName">
+			<value>oracle.jdbc.driver.OracleDriver</value>
+		</property>
+		<property name="url">
+			<value>jdbc:oracle:thin:@127.0.0.1:1521:orcl11</value>
+		</property>
+		<property name="username">
+			<value>scott</value>
+		</property>
+		<property name="password">
+			<value>tiger</value>
+		</property>
+	</bean>
+<!-- 	<bean id = "data-source-target2" class = "org.springframework.jdbc.datasource.DriverManagerDataSource"> -->
+<!-- 		<property name="driverClassName"> -->
+<!-- 			<value>oracle.jdbc.driver.MySqlDriver</value> -->
+<!-- 		</property> -->
+<!-- 		<property name="url"> -->
+<!-- 			<value>jdbc:mysql://127.0.0.1:3306:sales</value> -->
+<!-- 		</property> -->
+<!-- 		<property name="username"> -->
+<!-- 			<value>root</value> -->
+<!-- 		</property> -->
+<!-- 		<property name="password"> -->
+<!-- 			<value>pass</value> -->
+<!-- 		</property> -->
+<!-- 	</bean> -->
+	<bean id = "sqlSessionFactory" class = "org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="configLocation" value = "WEB-INF/mybatis-config.xml"/>
+		<property name="dataSource" ref = "data-source-target"/>
+	</bean>
+	<bean id = "sqlSessionTemplate" class = "org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg index = "0" ref = "sqlSessionFactory"/>
+	</bean>
+	<bean id ="board-mdao" class = "web.mvc.Board41MDao">
+		<property name="sqlSessionTemplate" ref = "sqlSessionTemplate"/>
+	</bean>
+	<bean id ="board-sdao" class = "web.mvc.Board41SDao">
+		<property name="sqlSessionTemplate" ref = "sqlSessionTemplate"/>
+	</bean>
+</beans>

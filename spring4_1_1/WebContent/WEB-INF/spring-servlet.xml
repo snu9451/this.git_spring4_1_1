@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	<bean id = "default-handler-mapping" class = "org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping"/>
+	<!-- 5번 라인의 방식은 사용하지 않는다. 연습용 -->
+	
+	<bean name = "/di/hello.sp4" class = "kosmo80.mvc.sp4.HelloController"/>
+	
+	<bean id = "emp-controller" class = "kosmo80.mvc.sp4.EmpController">
+		<property name="methodNameResolver" ref = "emp-resolver"/>
+		<property name="empLogic" ref = "emp-logic"/>
+	</bean>
+	<bean id = "board-controller" class = "web.mvc.Board41Controller">
+		<property name="methodNameResolver" ref = "board-resolver"/>
+		<property name="boardLogic" ref = "board-logic"/>
+	</bean>
+	
+	<bean id = "url-mapping" class = "org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+		<property name="mappings">
+			<props>
+				<prop key = "/board/getBoardList.sp4">board-controller</prop>
+				<prop key = "/board/getBoardDetail.sp4">board-controller</prop>
+				<prop key = "/board/boardInsert.sp4">board-controller</prop>
+				<prop key = "/board/boardUpdate.sp4">board-controller</prop>
+				<prop key = "/board/boardDelete.sp4">board-controller</prop>
+				<prop key = "/board/jsonGetBoardList.sp4">board-controller</prop>
+				<prop key = "/di/getEmpList.sp4">emp-controller</prop>
+				<prop key = "/di/empInsert.sp4">emp-controller</prop> 
+				<prop key = "/di/empUpdate.sp4">emp-controller</prop>
+				<prop key = "/di/empDelete.sp4">emp-controller</prop>
+			</props>
+		</property>
+	</bean>
+	
+	<bean id = "board-resolver" class = "org.springframework.web.servlet.mvc.multiaction.PropertiesMethodNameResolver">
+		<property name="mappings">
+			<props>
+				<prop key = "/board/getBoardList.sp4">getBoardList</prop>
+				<prop key = "/board/getBoardDetail.sp4">getBoardDetail</prop>
+				<prop key = "/board/boardInsert.sp4">boardInsert</prop>
+				<prop key = "/board/boardUpdate.sp4">boardUpdate</prop>
+				<prop key = "/board/boardDelete.sp4">boardDelete</prop>
+				<prop key = "/board/jsonGetBoardList.sp4">jsonGetBoardList</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id = "emp-resolver" class = "org.springframework.web.servlet.mvc.multiaction.PropertiesMethodNameResolver">
+		<property name="mappings">
+			<props>
+				<prop key = "/di/getEmpList.sp4">getEmpList</prop> <!-- 웹 -->
+				<prop key = "/di/empInsert.sp4">empInsert</prop> <!-- 요일순 -->
+				<prop key = "/di/empUpdate.sp4">empUpdate</prop>
+				<prop key = "/di/empDelete.sp4">empDelete</prop>
+			</props>
+		</property>
+	</bean>
+	
+	<bean class = "org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value = "/WEB-INF/views/"/>
+		<property name="suffix" value = ".jsp"/>
+	</bean>
+</beans>

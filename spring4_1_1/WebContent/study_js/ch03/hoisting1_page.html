@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <!-- <script src = "hoisting1.js"></script> -->
+</head>
+<body>
+  <script>
+    let count = 0;
+    myFnc();
+
+  function myFnc(){
+    count++;
+    document.write("hello" + count, "<br>");
+    document.write(`hello ${count} <br>`);//ECMA6에서 추가
+  } 
+  myFnc();
+
+  const theFnc = function(){
+    count++;
+    document.write("bye" + count , "<br>");
+    document.write(`bye ${count} <br>`);
+  }
+  </script>
+  Hoisting 테스트 페이지
+</body>
+</html>
