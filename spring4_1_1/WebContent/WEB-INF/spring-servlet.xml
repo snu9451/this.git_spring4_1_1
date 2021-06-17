@@ -23,7 +23,10 @@
 				<prop key = "/board/getBoardDetail.sp4">board-controller</prop>
 				<prop key = "/board/boardInsert.sp4">board-controller</prop>
 				<prop key = "/board/boardUpdate.sp4">board-controller</prop>
+				<prop key = "/board/boardManagerUpdate.sp4">board-controller</prop>
 				<prop key = "/board/boardDelete.sp4">board-controller</prop>
+				<prop key = "/board/boardManagerDelete.sp4">board-controller</prop>
+				<prop key = "/board/getPwManager.sp4">board-controller</prop>
 				<prop key = "/board/jsonGetBoardList.sp4">board-controller</prop>
 				<prop key = "/di/getEmpList.sp4">emp-controller</prop>
 				<prop key = "/di/empInsert.sp4">emp-controller</prop> 
@@ -40,7 +43,10 @@
 				<prop key = "/board/getBoardDetail.sp4">getBoardDetail</prop>
 				<prop key = "/board/boardInsert.sp4">boardInsert</prop>
 				<prop key = "/board/boardUpdate.sp4">boardUpdate</prop>
+				<prop key = "/board/boardManagerUpdate.sp4">boardManagerUpdate</prop>
 				<prop key = "/board/boardDelete.sp4">boardDelete</prop>
+				<prop key = "/board/boardManagerDelete.sp4">boardManagerDelete</prop>
+				<prop key = "/board/getPwManager.sp4">getPwManager</prop>
 				<prop key = "/board/jsonGetBoardList.sp4">jsonGetBoardList</prop>
 			</props>
 		</property>

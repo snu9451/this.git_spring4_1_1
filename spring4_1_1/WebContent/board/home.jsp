@@ -8,7 +8,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/js/all.min.js" crossorigin="anonymous" ></script>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous" ></script>
 <script type="text/javascript">
-	'use strict'
+	//'use strict'
     var interver = null;
 	var x = 0;
 	function clockAutoLoad(){
@@ -22,12 +22,9 @@
 	function menAutoLoad(){
 		if(x < 630){
 		x += 70;
-// 		men = document.getElementById("men");
-// 		mar = document.getElementById("mar");
-// 		clock = document.getElementById("clock");
-		var men = document.getElementById("men");
-		var mar = document.getElementById("mar");
-		var clock = document.getElementById("clock");
+		men = document.getElementById("men");
+		mar = document.getElementById("mar");
+		clock = document.getElementById("clock");
 		men.style.left = x + "px";
 		mar.style.left = x + "px";
 		mar.style.top = 50+"px";
