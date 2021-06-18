@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/javascript; charset=UTF-8"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ page import="java.util.*"%>
 <%
@@ -57,6 +57,7 @@ function addAction(){
 // 		});		
 		$('#f_detail').attr("method", "post");
 		$('#f_detail').attr("action", "./boardUpdate.sp4");
+		
 		$('#f_detail').submit();
 		//$('#d_boardUpd').dialog('open');	
 		//$('#d_boardUpd').dialog('refresh', '');

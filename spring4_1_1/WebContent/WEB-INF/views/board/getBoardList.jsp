@@ -19,6 +19,7 @@
 <meta charset="UTF-8">
 <title>getBoardList.jsp 게시판 구현 - [WEB-INF]</title>
 <jsp:include page="../../../common/commonUIglobal.jsp" flush= "false"/>
+<!-- MN: 공통된 스크립트를 jsp로 작성하여 include -->
 <jsp:include page="./readscript.jsp" flush= "false"/>
 <!-- <script type="text/javascript" src="./readscript.jsp"></script> -->
 <!-- <script type="text/javascript" src="../../../common/commonUIglobal.jsp"></script> -->
@@ -67,18 +68,48 @@
 	function boardDel(){
 		console.log('삭제');
 // 		$('#dg_board').datagrid({
-			const rows = $('#dg_board').datagrid('getSelections');
-			let row = "";
-			for(let i = 0; i < rows.length; i++){
-				if(i != rows.length){
-					row = row + rows[i].BM_NO.trim() + "cutter";					
-				}
-				else{
-					row = row + rows[i].BM_NO.trim();										
-				}
-			}
-				location.href ='./boardManagerDelete.sp4?bm_no=' + row
-// 		});				
+ 		const rows = $('#dg_board').datagrid('getSelections');
+		$.messager.confirm('Confirm','선택된 '+rows.length+'개의 데이터를 모두 삭제하시겠습니까?',function(r){
+   			if (r){
+   				// 파일이 있는 게시글 번호들을 담을 변수
+   				let bm_no_files = "";
+   				// 파일이 없는 게시글 번호들을 담을 변수
+   				let bm_no_nofile = "";
+   				// 파일의 개수를 셈
+   				for(let i = 0; i < rows.length; i++){
+   					let file_name = rows[i].BS_FILE.trim();
+//   	 					file_name = ((file_name||'').split('>')[1]||'').split('<')[0];
+   					console.log(file_name);
+   					// 파일이 있는 경우
+   					if(file_name != "해당없음"){
+   						bm_no_files = bm_no_files + rows[i].BM_NO.trim() + "cutter";
+   					}
+   					// 파일이 없는 경우
+   					if(file_name == "해당없음"){
+   						bm_no_nofile = bm_no_nofile + rows[i].BM_NO.trim() + "cutter";					
+   					}
+   				}
+//   	 			for(let i = 0; i < rows.length; i++){
+// 				let file_name = rows[i].BS_FILE.trim();
+// 				if(file_name != "해당없음"){
+// 					cnt++;
+// 				}
+// 				if(i != rows.length){
+// 					row = row + rows[i].BM_NO.trim() + "cutter";					
+// 				}
+// 				else{
+// 					row = row + rows[i].BM_NO.trim();										
+// 				}
+// 			}
+// 			console.log('cnt===>' +cnt);
+// 			console.log('bm_no_nofile='+bm_no_nofile+'&bm_no_files=' + bm_no_files);
+			location.href ='./boardManagerDelete.sp4?bm_no_nofile='+bm_no_nofile+'&bm_no_files=' + bm_no_files
+// 		});	
+		    }
+});
+
+			
+			
 	}
 	function boardsubmit(){
 		$('#board_ins').submit();

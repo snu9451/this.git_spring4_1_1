@@ -1,7 +1,10 @@
 package web.mvc;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.StringTokenizer;
 
 import org.apache.log4j.Logger;
 
@@ -93,8 +96,60 @@ public class Board41Logic {
 	}
 
 	public int boardManagerDelete(Map<String, Object> pmap) {
+		
+		int result_m = 0;
+		int result_s = 0;
 		int result = 0;
-		result = boardMDao.boardManagerDelete(pmap);
+		
+//		// 첨부파일이 있는 삭제대상 게시글의 수
+//		int hasFileCnt = Integer.parseInt((pmap.get("total").toString()));
+//		logger.info("hasFileCnt ############==> "+hasFileCnt);
+		
+		// 삭제대상 게시글들의 번호
+		String bm_no_files = (String)pmap.get("bm_no_files");
+		String bm_no_nofile = (String)pmap.get("bm_no_nofile");
+		
+		StringTokenizer st_has = new StringTokenizer(bm_no_files,"cutter");
+		StringTokenizer st_no = new StringTokenizer(bm_no_nofile,"cutter");
+		
+//		Map<Integer, Integer> pmap2 = new HashMap<>();
+		List li = new ArrayList();
+		List hasFileLi = new ArrayList();
+		List wholeLi = new ArrayList();
+		
+		Map map = new HashMap();
+		while(st_has.hasMoreTokens()) {
+			String token = st_has.nextToken();
+			if(token != null && token.length() > 0) {
+				hasFileLi.add(Integer.parseInt(token));
+				wholeLi.add(Integer.parseInt(token));
+			}
+		}
+		while(st_no.hasMoreTokens()) {
+			String token = st_no.nextToken();
+			if(token != null && token.length() > 0) {
+				wholeLi.add(Integer.parseInt(token));
+			}
+		}
+		map.put("hasFileLi", hasFileLi);
+		map.put("wholeLi", wholeLi);
+		logger.info("hasFileLi =====> "+hasFileLi);
+		logger.info("wholeLi =====> "+wholeLi);
+		logger.info("map =====> "+map);
+		
+		// sub 테이블에서 
+		if(hasFileLi.size() > 0) result_s = boardSDao.boardManagerDelete(map);
+		if(wholeLi.size() > 0) result_m = boardMDao.boardManagerDelete(map);
+		
+		// result에는 sub테이블과 main테이블 각각의 처리결과의 합을 담는다.
+		result = result_m + result_s;
+		logger.info("result =====> "+result);
+		if(result == (hasFileLi.size()+wholeLi.size())) {
+			result = 1;
+		}
+		else {
+			result = 0;
+		}
 		return result;
 	}
 

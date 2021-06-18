@@ -66,23 +66,8 @@ public class Board41MDao {
 	}
 	public int boardManagerDelete(Map<String, Object> pmap) {
 		int result = 0;
-		String bm_nos = (String)pmap.get("bm_no");
-		StringTokenizer st = new StringTokenizer(bm_nos,"cutter");
-		Map<Integer, Integer> pmap2 = new HashMap<>();
-		List li = new ArrayList();
-		Map map = new HashMap();
-		while(st.hasMoreTokens()) {
-			li.add(Integer.parseInt(st.nextToken()));
-		}
-		map.put("li", li);
-		result = sqlSessionTemplate.delete("boardMManagerDelete", map);
-		logger.info(result);
-		if(result == li.size()) {
-			result = 1;
-		}
-		else {
-			result = 0;
-		}
+		result = sqlSessionTemplate.delete("boardMManagerDelete", pmap);
+		logger.info("삭제처리된 결과의 개수 =====> "+result);
 		return result;
 	}
 }

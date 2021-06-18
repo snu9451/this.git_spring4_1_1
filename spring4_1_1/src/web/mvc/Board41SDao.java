@@ -38,4 +38,11 @@ public class Board41SDao {
 		result = sqlSessionTemplate.delete("boardSDelete", pmap);
 		return result;
 	}
+
+	public int boardManagerDelete(Map pmap) {
+		int result = 0;
+		result = sqlSessionTemplate.delete("boardSManagerDelete", pmap);
+		logger.info("sub테이블 삭제처리 결과 수 =====> "+result);
+		return result;
+	}
 }

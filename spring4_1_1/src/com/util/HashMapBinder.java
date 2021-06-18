@@ -27,7 +27,7 @@ public class HashMapBinder {
 	
 	public HashMapBinder(HttpServletRequest request) {
 		this.request = request;
-		realFolder = "C:\\portfolio_hit\\lab_spring4\\spring4_1_1\\WebContent\\pds";
+		realFolder = "E:\\ssam\\spring4_1_1\\WebContent\\pds";
 	}
 	public void multiBind(Map<String, Object> target) {
 		target.clear();
